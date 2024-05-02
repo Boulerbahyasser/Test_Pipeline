@@ -24,10 +24,15 @@ jobs:
       
      
       - name: Build Docker image with Docker Compose
-        run: docker-compose build -t testimage
+        run: docker-compose build 
+      
+      - name: Find Docker image name
+        id: find_image_name
+        run: echo "::set-output name=image_name::$(docker-compose images --format '{{.Repository}}' | head -n 1)"
+
         
       - name: Tag Docker image 
-        run: docker tag testimage ${{ secrets.DOCKER_HUB_USERNAME }}/project_image:latest 
+        run: docker tag ${{ steps.find_image_name.outputs.image_name }} ${{ secrets.DOCKER_HUB_USERNAME }}/project_image:latest 
         
       - name: Push Docker image to Docker Hub
         run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/project_image:latest 
