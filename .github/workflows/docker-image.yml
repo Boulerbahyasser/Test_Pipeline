@@ -29,6 +29,8 @@ jobs:
       - name: Find Docker image name
         id: find_image_name
         run: echo "::set-output name=image_name::$(docker-compose images --format '{{.Repository}}' | head -n 1)"
+      - name: Debug image name
+        run: echo "Image name ${{ steps.find_image_name.outputs.image_name }}"
 
         
       - name: Tag Docker image 
