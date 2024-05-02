@@ -24,7 +24,7 @@ jobs:
       
      
       - name: Build Docker image with Docker Compose
-        run: docker-compose build
+        run: docker-compose build -t testimage
         
       - name: Tag Docker image 
         run: docker tag testimage ${{ secrets.DOCKER_HUB_USERNAME }}/project_image:latest 
