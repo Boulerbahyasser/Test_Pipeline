@@ -21,11 +21,13 @@ jobs:
         with:
             username: ${{ secrets.DOCKER_HUB_USERNAME }}
             password: ${{ secrets.DOCKER_HUB_TOKEN }}
-      - name: Tag Docker image 
-        run: docker tag Test_Image ${{ secrets.DOCKER_HUB_USERNAME }}/wailhadad1221/project_image:latest
+      
      
       - name: Build Docker image with Docker Compose
         run: docker-compose build
-
+        
+      - name: Tag Docker image 
+        run: docker tag Test_Image ${{ secrets.DOCKER_HUB_USERNAME }}/project_image:latest 
+        
       - name: Push Docker image to Docker Hub
-        run: docker-compose push 
+        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/project_image:latest 
