@@ -9,7 +9,7 @@ services:
     depends_on:
       - db
     env_file:
-      - ./api/.env
+      - api/.env
     command: >
       bash -c "composer install &&
                php artisan key:generate &&
