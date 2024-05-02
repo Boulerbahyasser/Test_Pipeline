@@ -27,7 +27,7 @@ jobs:
         run: docker-compose build
         
       - name: Tag Docker image 
-        run: docker tag Test_Image ${{ secrets.DOCKER_HUB_USERNAME }}/project_image:latest 
+        run: docker tag testimage ${{ secrets.DOCKER_HUB_USERNAME }}/project_image:latest 
         
       - name: Push Docker image to Docker Hub
         run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/project_image:latest 
