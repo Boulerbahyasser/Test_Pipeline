@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   backend:
+    image: wailhadad1221/project_image:backend-latest
     build:
       context: ./api
       dockerfile: Dockerfile
@@ -11,7 +12,7 @@ services:
     environment:
       - APP_NAME=Laravel
       - APP_ENV=local
-      - APP_KEY=base64:7g8BZpp36aIAa4NJogVlD3/YAO4lKI/pabeVl71eH34=
+      - APP_KEY=base64:ZZB3v6uIianzcko2C5jC2FXHWbroM3iNzHWkuwHRsTM=
       - APP_DEBUG=true
       - APP_URL=http://localhost
       - DB_CONNECTION=pgsql
@@ -29,6 +30,7 @@ services:
       - "8000:8000"
 
   frontend:
+    image: wailhadad1221/project_image:frontend-latest
     build:
       context: ./Frontend
       dockerfile: Dockerfile
@@ -39,7 +41,7 @@ services:
       - backend
 
   nginx:
-    image: nginx:alpine
+    image: wailhadad1221/project_image:nginx-custom
     ports:
       - "80:80"
       - "443:443"
@@ -53,7 +55,7 @@ services:
       - dnsmasq
 
   dnsmasq:
-    image: andyshinn/dnsmasq:2.78
+    image: wailhadad1221/project_image:dnsmasq
     cap_add:
       - NET_ADMIN
     ports:
@@ -63,7 +65,7 @@ services:
       - ./hosts:/etc/hosts-custom
 
   db:
-    image: postgres:latest
+    image: wailhadad1221/project_image:postgres
     environment:
       POSTGRES_DB: myapp
       POSTGRES_USER: user
@@ -72,13 +74,13 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   mailhog:
-    image: mailhog/mailhog
+    image: wailhadad1221/project_image:mailhog
     ports:
       - "1025:1025"
       - "8025:8025"
 
   pgadmin:
-    image: dpage/pgadmin4
+    image: wailhadad1221/project_image:pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: wailw2445@gmail.com
       PGADMIN_DEFAULT_PASSWORD: 123
